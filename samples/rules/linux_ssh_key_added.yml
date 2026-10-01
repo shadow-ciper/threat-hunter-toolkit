@@ -1,0 +1,17 @@
+title: SSH Authorized Keys Modified
+id: b91d5e37-2c48-4a6f-8b13-7f0e9d2c4a55
+status: experimental
+description: Detects writes to authorized_keys, a common persistence mechanism after initial access.
+author: shadow-ciper
+level: medium
+logsource:
+    product: linux
+    category: file_event
+detection:
+    selection:
+        TargetFilename|contains: '/.ssh/authorized_keys'
+        Operation: 'write'
+    condition: selection
+tags:
+    - attack.persistence
+    - attack.t1098

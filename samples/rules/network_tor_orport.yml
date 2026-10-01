@@ -1,0 +1,18 @@
+title: Outbound Connection to Tor ORPort
+id: d58b0a21-4f62-4c83-ad15-9b2e7f4c6077
+status: experimental
+description: Detects outbound sessions to a common Tor relay port from a workstation.
+author: shadow-ciper
+level: medium
+logsource:
+    category: network_connection
+detection:
+    selection:
+        DestinationPort:
+            - 9001
+            - 9030
+        Initiated: 'true'
+    condition: selection
+tags:
+    - attack.command-and-control
+    - attack.t1090

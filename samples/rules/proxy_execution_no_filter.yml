@@ -1,0 +1,16 @@
+title: Rundll32 Execution
+id: e69c1b32-5073-4d94-be26-ac3f80517188
+status: experimental
+description: Detects rundll32 execution, which is frequently abused for proxy execution of injected code.
+author: shadow-ciper
+level: low
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection:
+        Image|endswith: '\\rundll32.exe'
+    condition: selection
+tags:
+    - attack.execution
+    - attack.t1218

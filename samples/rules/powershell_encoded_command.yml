@@ -1,0 +1,23 @@
+title: PowerShell Encoded Command Execution
+id: c47a9f10-3e51-4b72-9c04-8a1d6e3b5f66
+status: stable
+description: Detects powershell invoked with a base64 encoded command, commonly used to hide payloads.
+author: shadow-ciper
+level: high
+logsource:
+    product: windows
+    category: process_creation
+detection:
+    selection:
+        Image|endswith: '\\powershell.exe'
+        CommandLine|contains:
+            - ' -enc '
+            - ' -EncodedCommand '
+    condition: selection
+false_positives:
+    - Administrative scripts that legitimately pass encoded commands
+tags:
+    - attack.execution
+    - attack.defense-evasion
+    - attack.t1059.001
+    - attack.t1027
